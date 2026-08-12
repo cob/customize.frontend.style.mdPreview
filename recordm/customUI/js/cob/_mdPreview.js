@@ -8,8 +8,10 @@ function handleDollarPreview(){
         e.innerHTML = input;
         return e.childNodes[0].nodeValue;
       }
-      let hasMarkdownDollar = /[$]markdown.*[$]style\[([^,]+,)*mdPreview(,[^,]+)*\]/.exec(colDef.fieldDefDescription)
-      if (hasMarkdownDollar && node.innerHTML) {
+      let hasMarkdownKeyword = /[$]markdown/.exec(colDef.fieldDefDescription)
+      let hasMarkdownPreview = /[$]style\[([^,]+,)*mdPreview(,[^,]+)*\]/.exec(colDef.fieldDefDescription)
+
+      if (hasMarkdownKeyword && hasMarkdownPreview && node.innerHTML) {
         marked.setOptions({ xhtml: false })
         node.classList.add("dollarMarkdownCell");
         node.innerHTML = `
